@@ -22,3 +22,8 @@ jobs:
 
       - name: Run build
         run: ./gradlew build
+
+      - name: Update coveralls coverage report
+        run: ./gradlew coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}

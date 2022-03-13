@@ -13,6 +13,7 @@ plugins {
     `maven-publish`
     signing
     jacoco
+    id("com.github.kt3k.coveralls")
 }
 
 group = "pt.davidafsilva.jvm.kotlin"
@@ -136,11 +137,12 @@ tasks {
         useJUnitPlatform()
     }
 
-    register("testCoverage") {
+    val testCoverage = register("testCoverage") {
         dependsOn("test", ":jacocoTestReport", ":jacocoTestCoverageVerification")
         group = "verification"
         description = "Runs both the coverage report and validation"
     }
+    findByName("test")!!.finalizedBy(testCoverage)
 }
 
 fun RepositoryHandler.registerRepositories() {
