@@ -19,6 +19,15 @@ import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.full.primaryConstructor
 
+/**
+ * Tries to convert the function's receiver into a prettified string.
+ *
+ * Currently only data classes are eligible to being prettified.
+ * The output of the function when the receiver is not a data class should be roughly equivalent of directly
+ * calling its [toString].
+ *
+ * @param indentationWidth the indentation width to be applied. Defaults to 2.
+ */
 fun Any?.toPrettyString(indentationWidth: Int = 2): String {
     val sb = StringBuilder()
     prettifyObject(from = this, to = sb, indentationWidth)

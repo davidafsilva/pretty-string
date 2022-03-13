@@ -96,6 +96,9 @@ Person@3e3abc88(
 )
 ```
 
+Optionally, you can specify the indentation to be applied during the formatting via the `indentationWidth` parameter. 
+When omitted, it defaults to `2`.
+
 ## Building
 At the project root, run the following command:
 ```shell
