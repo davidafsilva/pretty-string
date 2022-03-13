@@ -1,4 +1,4 @@
-package pt.davidafsilva.jvm.prettystring
+package pt.davidafsilva.jvm.kotlin
 
 import java.lang.Integer.toHexString
 import java.lang.System.identityHashCode

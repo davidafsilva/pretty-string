@@ -14,7 +14,7 @@ plugins {
     signing
 }
 
-group = "pt.davidafsilva.jvm.prettystring"
+group = "pt.davidafsilva.jvm.kotlin"
 scmVersion {
     tag(closureOf<TagNameSerializationConfig> {
         prefix = "v"

@@ -1,6 +1,6 @@
 @file:Suppress("ArrayInDataClass")
 
-package pt.davidafsilva.jvm.prettystring
+package pt.davidafsilva.jvm.kotlin
 
 import io.kotest.assertions.fail
 import io.kotest.core.spec.style.DescribeSpec
