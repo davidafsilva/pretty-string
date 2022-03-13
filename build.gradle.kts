@@ -77,8 +77,8 @@ configure<PublishingExtension> {
                 inceptionYear.set("2022")
                 licenses {
                     license {
-                        name.set("MIT")
-                        url.set("https://opensource.org/licenses/MIT")
+                        name.set("BSD 3-Clause")
+                        url.set("https://opensource.org/licenses/BSD-3-Clause")
                     }
                 }
                 developers {
