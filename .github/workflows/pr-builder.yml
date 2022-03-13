@@ -1,0 +1,27 @@
+name: Pull Request Builder
+
+on:
+  pull_request:
+    branches: '**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: 8
+          architecture: x64
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Run tests and test coverage
+        run: ./gradlew test
+
+      - name: Run build
+        run: ./gradlew build -x test

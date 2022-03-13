@@ -1,0 +1,76 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      versionStrategy:
+        description: 'The version increment strategy'
+        default: Minor
+        required: true
+        type: choice
+        options:
+          - Prerelease
+          - Patch
+          - Minor
+          - Major
+jobs:
+  create-tag:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.post-tag.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: 8
+          architecture: x64
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Get pre-tag version
+        run: ./gradlew currentVersion
+
+      - name: Create tag
+        run: |
+          ./gradlew release \
+            -Prelease.versionIncrementer=increment${{ github.event.inputs.versionStrategy }} \
+            -Prelease.customUsername=${{ github.actor }} \
+            -Prelease.customPassword=${{ github.token }}
+
+      - name: Get tagged version
+        id: post-tag
+        run: echo "::set-output name=tag::v$(./gradlew cV -Prelease.quiet -q)"
+
+  publish-artifacts:
+    needs: [ create-tag ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout tag
+        uses: actions/checkout@v2
+        with:
+          ref: ${{needs.create-tag.outputs.tag}}
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: 8
+          architecture: x64
+
+      - name: Build artifacts
+        run: ./gradlew clean build -x test -x check
+
+      - name: Sign and publish artifacts
+        run: ./gradlew publishArtifactsPublicationToSonatypeRepository
+        env:
+          ORG_GRADLE_PROJECT_signingGpgKey: ${{ secrets.GPG_KEY }}
+          ORG_GRADLE_PROJECT_signingGpgKeyId: ${{ secrets.GPG_KEY_ID }}
+          ORG_GRADLE_PROJECT_signingGpgKeyPassword: ${{ secrets.GPG_KEY_PASSWORD }}
+          OSSRH_USER: ${{ secrets.OSSRH_USER }}
+          OSSRH_TOKEN: ${{ secrets.OSSRH_TOKEN }}
