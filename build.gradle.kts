@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.kt3k.gradle.plugin.CoverallsPluginExtension
 import pl.allegro.tech.build.axion.release.domain.ChecksConfig
 import pl.allegro.tech.build.axion.release.domain.RepositoryConfig
 import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
@@ -131,6 +132,10 @@ tasks {
             xml.required.set(true)
             html.required.set(true)
         }
+    }
+
+    configure<CoverallsPluginExtension> {
+        sourceDirs = sourceDirs + "src/main/kotlin"
     }
 
     withType<Test> {
