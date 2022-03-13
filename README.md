@@ -45,10 +45,12 @@ dependencies {
       <version>0.1.0</version>
   </dependency>
   <!-- be sure to include kotlin-reflect as one of your kotlin dependencies, if you don't have it already -->
+  <!--
   <dependency>
     <groupId>org.jetbrains.kotlin</groupId>
     <artifactId>kotlin-reflect</artifactId>
   </dependency>
+  -->
 </dependencies>
 ```
 
