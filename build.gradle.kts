@@ -30,8 +30,8 @@ scmVersion {
 version = scmVersion.version
 
 dependencies {
-    implementation(kotlin("stdlib"))
-    implementation(kotlin("reflect"))
+    api(kotlin("stdlib"))
+    api(kotlin("reflect"))
 
     val kotestVersion: String by project
     testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
