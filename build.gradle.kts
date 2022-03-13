@@ -12,6 +12,7 @@ plugins {
     id("pl.allegro.tech.build.axion-release")
     `maven-publish`
     signing
+    jacoco
 }
 
 group = "pt.davidafsilva.jvm.kotlin"
@@ -118,14 +119,27 @@ tasks {
         }
     }
 
-    withType<Test> {
-        useJUnitPlatform()
-    }
-
     withType<Jar> {
         from("${projectDir}/LICENSE") {
             rename("LICENSE", "META-INF/LICENSE.txt")
         }
+    }
+
+    withType<JacocoReport> {
+        reports {
+            xml.required.set(true)
+            html.required.set(true)
+        }
+    }
+
+    withType<Test> {
+        useJUnitPlatform()
+    }
+
+    register("testCoverage") {
+        dependsOn("test", ":jacocoTestReport", ":jacocoTestCoverageVerification")
+        group = "verification"
+        description = "Runs both the coverage report and validation"
     }
 }
 

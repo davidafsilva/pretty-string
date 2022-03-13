@@ -63,7 +63,7 @@ private fun prettifyDataClass(from: Any, to: StringBuilder, indentationWidth: In
         .append(lineSeparator())
 
     // body
-    val orderedMembers = clazz.primaryConstructor?.parameters.orEmpty().associate { it.name!! to it.index }
+    val orderedMembers = clazz.primaryConstructor!!.parameters.associate { it.name!! to it.index }
     val comparator = comparingInt<KProperty1<out Any, *>?> { member ->
         orderedMembers[member.name] ?: orderedMembers.size
     }.thenComparing(KProperty1<out Any, *>::name)

@@ -155,6 +155,31 @@ class PrettifierTestSpec : DescribeSpec({
             }
         }
 
+        describe("with properties defined outside of the constructor") {
+            data class Person(
+                val firstName: String = "John",
+                val lastName: String = "Doe",
+                val age: Int = 50,
+            ) {
+                val fullName: String = "$firstName $lastName"
+                val isAdult: Boolean = age > 21
+            }
+
+            val instance = Person()
+            it("should order the members by constructor order and then by name") {
+                val expected = """
+                    Person@${instance.id()}(
+                      firstName = "John",
+                      lastName = "Doe",
+                      age = 50,
+                      fullName = "John Doe",
+                      isAdult = true,
+                    )
+                    """.trimIndent()
+                instance.toPrettyString() shouldBe expected
+            }
+        }
+
         describe("with nested data classes as members of the root data class") {
             data class Tree<V>(
                 val value: V,
