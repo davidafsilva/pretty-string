@@ -1,6 +1,7 @@
 # pretty-string
 
-[![Main Build Status](https://img.shields.io/github/workflow/status/davidafsilva/pretty-string/Main%20Build?label=Build&style=flat-square)](https://github.com/davidafsilva/pretty-string/actions?query=workflow%3A%22Main+Build%22+branch%3Amain)
+
+[![Main Build Status](https://img.shields.io/github/actions/workflow/status/davidafsilva/pretty-string/main-build.yml?branch=main&label=Build&style=flat-square)](https://github.com/davidafsilva/pretty-string/actions/workflows/main-build.yml)
 [![Coverage Report](https://img.shields.io/coveralls/github/davidafsilva/pretty-string?color=brightgreen&label=Coverage&style=flat-square)](https://coveralls.io/github/davidafsilva/pretty-string)
 [![Latest Release](https://img.shields.io/maven-central/v/pt.davidafsilva.jvm.kotlin/pretty-string?color=brightgreen&label=Latest%20Release&style=flat-square)](https://repo1.maven.org/maven2/pt/davidafsilva/jvm/kotlin/pretty-string/)
 [![License](https://img.shields.io/github/license/davidafsilva/pretty-string?color=brightgreen&label=License&logo=License&style=flat-square)](https://opensource.org/licenses/BSD-3-Clause)
